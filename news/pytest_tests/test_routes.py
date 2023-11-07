@@ -17,8 +17,8 @@ from django.urls import reverse
      ('users:signup', None),),
 )
 def test_pages_availability_for_anonymous_user(client, name, args):
-    url = url = reverse(name, args=args)  # Получаем ссылку на нужный адрес.
-    response = client.get(url)  # Выполняем запрос.
+    url = url = reverse(name, args=args)
+    response = client.get(url)
     assert response.status_code == HTTPStatus.OK
 
 
@@ -45,8 +45,6 @@ def test_pages_availability_for_auth_user(admin_client, name, args):
 
 @pytest.mark.parametrize(
     'parametrized_client, expected_status',
-    # Предварительно оборачиваем имена фикстур
-    # в вызов функции pytest.lazy_fixture().
     (
         (pytest.lazy_fixture('admin_client'), HTTPStatus.NOT_FOUND),
         (pytest.lazy_fixture('author_client'), HTTPStatus.OK)

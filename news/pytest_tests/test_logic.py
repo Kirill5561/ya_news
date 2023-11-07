@@ -39,7 +39,6 @@ def test_author_can_delete_comment(author_client,
     response = author_client.delete(url)
     assertRedirects(response, url_to_comments)
     comments_count = Comment.objects.count()
-    # Ожидаем ноль комментариев в системе.
     assert comments_count == 0
 
 
@@ -49,7 +48,6 @@ def test_user_cant_delete_comment_of_another_user(admin_client,
     response = admin_client.delete(url)
     assert response.status_code == HTTPStatus.NOT_FOUND
     comments_count = Comment.objects.count()
-    # Ожидаем ноль комментариев в системе.
     assert comments_count == 1
 
 
